@@ -1,0 +1,11 @@
+---
+
+- name: Configure timezone for Debian-based distributions
+  include: "debian.yml"
+  when: ansible_os_family == 'Debian'
+  tags: [ "timezone" ]
+
+- name: Configure timezone for Fedora
+  include: "fedora.yml"
+  when: ansible_distribution == 'Fedora'
+  tags: [ "timezone" ]

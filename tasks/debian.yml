@@ -1,0 +1,15 @@
+---
+- name: Update Timezone 
+  copy:
+    content: "{{timezone}}\n"
+    dest: "/etc/timezone"
+    owner: root
+    group: root
+    mode: 0644
+  sudo: true
+  register: timezone
+
+- name: Reconfigure Timezone Data
+  shell: "dpkg-reconfigure -f noninteractive tzdata"
+  sudo: true
+  when: timezone.changed
